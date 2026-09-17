@@ -1,0 +1,331 @@
+@import "tailwindcss";
+
+:root {
+  --neo-bg: #e4eaf1;
+  --neo-bg-dark: #d8e0ea;
+  --color-background: #e4eaf1;
+  --color-foreground: #1a2332;
+  --color-primary: #5b21b6;
+  --color-on-primary: #ffffff;
+  --color-accent: #047857;
+  --color-on-accent: #ffffff;
+  --color-muted-foreground: #334155;
+  --color-danger: #b91c1c;
+  --radius: 16px;
+  --shadow-out:
+    8px 8px 16px #c5ccd6,
+    -8px -8px 16px #ffffff;
+  --shadow-in:
+    inset 6px 6px 12px #c5ccd6,
+    inset -6px -6px 12px #ffffff;
+  --shadow-press:
+    inset 4px 4px 8px #c5ccd6,
+    inset -4px -4px 8px #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--color-background);
+  --color-foreground: var(--color-foreground);
+  --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-varela), var(--font-nunito), sans-serif;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  background: var(--neo-bg);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+}
+
+.neo-out {
+  background: var(--neo-bg);
+  box-shadow: var(--shadow-out);
+  border-radius: var(--radius);
+}
+
+.neo-card-known {
+  background: #dce8f7;
+  box-shadow:
+    8px 8px 16px #b8c7d9,
+    -8px -8px 16px #f4f8fd,
+    inset 0 0 0 2px #3b82f6;
+}
+
+.neo-in {
+  background: var(--neo-bg);
+  box-shadow: var(--shadow-in);
+  border-radius: var(--radius);
+}
+
+.neo-btn {
+  background: var(--neo-bg);
+  box-shadow: var(--shadow-out);
+  border-radius: 14px;
+  color: var(--color-foreground);
+  cursor: pointer;
+  transition:
+    box-shadow 150ms ease,
+    transform 150ms ease;
+}
+
+.neo-btn:hover {
+  transform: translateY(-1px);
+}
+
+.neo-btn:active {
+  box-shadow: var(--shadow-press);
+  transform: translateY(1px);
+}
+
+.neo-btn:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+.neo-btn-primary {
+  background: linear-gradient(145deg, #6d28d9, #5b21b6);
+  color: var(--color-on-primary);
+  box-shadow:
+    6px 6px 12px #c5ccd6,
+    -4px -4px 10px #ffffff;
+}
+
+.neo-btn-primary:active {
+  box-shadow: inset 3px 3px 8px rgba(0, 0, 0, 0.25);
+}
+
+.neo-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  font-weight: 700;
+  color: var(--color-foreground);
+  background: var(--neo-bg-dark);
+  padding: 0.1em 0.35em;
+  border-radius: 6px;
+}
+
+.versus-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  width: 100%;
+  align-items: stretch;
+}
+
+.versus-grid-3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.versus-side {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.35rem 1.25rem;
+  text-align: center;
+}
+
+.versus-side + .versus-side {
+  border-left: 2px solid color-mix(in srgb, var(--color-primary) 35%, transparent);
+}
+
+.versus-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  line-height: 1.2;
+  color: var(--color-foreground);
+}
+
+.versus-badge {
+  position: absolute;
+  top: 0.35rem;
+  left: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  translate: -50% 0;
+  border-radius: 999px;
+  background: linear-gradient(145deg, #6d28d9, #5b21b6);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  box-shadow: var(--shadow-out);
+}
+
+.versus-points {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  text-align: center;
+  font-size: 0.98rem;
+  line-height: 1.45;
+  color: var(--color-muted-foreground);
+}
+
+.versus-points li {
+  max-width: 16rem;
+}
+
+@media (max-width: 640px) {
+  .versus-grid,
+  .versus-grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .versus-side + .versus-side {
+    border-left: 0;
+    border-top: 2px solid color-mix(in srgb, var(--color-primary) 35%, transparent);
+    padding-top: 1.4rem;
+    margin-top: 0.5rem;
+  }
+
+  .versus-badge {
+    top: 0;
+    left: 50%;
+    translate: -50% -50%;
+  }
+}
+
+.swipe-stamp {
+  position: absolute;
+  top: 1.75rem;
+  z-index: 3;
+  padding: 0.5rem 1rem;
+  border-radius: 14px;
+  border: 4px solid currentColor;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  pointer-events: none;
+  background: color-mix(in srgb, var(--neo-bg) 82%, transparent);
+}
+
+.swipe-stamp-ok {
+  right: 1.35rem;
+  color: var(--color-accent);
+  transform: rotate(14deg);
+}
+
+.swipe-stamp-ko {
+  left: 1.35rem;
+  color: var(--color-danger);
+  transform: rotate(-14deg);
+}
+
+.flash-stack {
+  position: relative;
+  min-height: 26rem;
+}
+
+.flash-stack-ghost {
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  background: var(--neo-bg);
+  box-shadow: var(--shadow-out);
+  pointer-events: none;
+}
+
+.flash-card {
+  position: relative;
+  z-index: 1;
+  min-height: 26rem;
+  overflow: visible;
+  border-radius: 24px;
+}
+
+.gloss-term {
+  color: var(--color-primary);
+  text-decoration: underline dotted;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+  cursor: help;
+  position: relative;
+}
+
+.gloss-term:hover,
+.gloss-term:focus-visible {
+  color: color-mix(in srgb, var(--color-primary) 72%, black);
+}
+
+.gloss-tip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 0.45rem);
+  z-index: 30;
+  width: max-content;
+  max-width: min(16rem, 68vw);
+  translate: -50% 0.35rem;
+  padding: 0.45rem 0.7rem;
+  border-radius: 10px;
+  background: #1a2332;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1.35;
+  text-align: left;
+  text-decoration: none;
+  white-space: normal;
+  letter-spacing: 0;
+  box-shadow: 6px 6px 14px #c5ced8, -4px -4px 10px #f4f7fb;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.12s ease, translate 0.12s ease, visibility 0.12s ease;
+}
+
+.gloss-term:hover .gloss-tip,
+.gloss-term:focus-visible .gloss-tip {
+  opacity: 1;
+  visibility: visible;
+  translate: -50% 0;
+}
+
+.flash-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.neo-btn-ok {
+  color: var(--color-accent);
+}
+
+.neo-btn-ko {
+  color: var(--color-danger);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neo-btn {
+    transition: none;
+  }
+
+  .neo-btn:hover,
+  .neo-btn:active {
+    transform: none;
+  }
+}
